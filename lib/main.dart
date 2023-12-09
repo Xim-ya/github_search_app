@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:github_search_app/app/config/index.dart';
 import 'package:github_search_app/app/modules/index.dart';
 import 'package:github_search_app/presentation/common/index.dart';
-
-import 'app/modules/local_storage/app_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppLocal.initHive();
   AppBinding.dependencies();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
