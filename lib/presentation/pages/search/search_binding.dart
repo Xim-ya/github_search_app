@@ -14,7 +14,5 @@ class SearchBinding extends RouteBinding {
     super.unRegisterDependencies();
 
     safeUnregister<SearchViewModel>();
-
-    print('에임 : [SEARCH]');
   }
 }

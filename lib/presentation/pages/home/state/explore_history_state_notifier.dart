@@ -48,7 +48,6 @@ class ExploreHistoryStateNotifier extends BaseStateNotifier {
       exploreHistories.value.insert(0, item);
 
       if (exploreHistories.value.length > 10) {
-        print('수수');
         exploreHistories.value.removeLast();
       }
       notifyListeners();

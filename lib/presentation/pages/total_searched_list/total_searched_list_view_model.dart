@@ -24,7 +24,5 @@ class TotalSearchedViewModel extends BaseViewModel {
   @override
   void dispose() {
     super.dispose();
-
-    print('아지랑이[TotalSearchedViewModel] - 해제');
   }
 }

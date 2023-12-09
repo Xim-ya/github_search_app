@@ -66,13 +66,11 @@ class FavoriteFriendStateNotifier extends BaseStateNotifier {
   void onInit() {
     super.onInit();
 
-    print('우지랑이');
     fetchFavoriteUsers();
   }
 
   @override
   void onDispose() {
     super.onDispose();
-    print('제발...');
   }
 }

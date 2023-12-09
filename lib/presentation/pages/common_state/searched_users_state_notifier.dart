@@ -78,14 +78,11 @@ class SearchedUsersStateNotifier extends BaseStateNotifier
   void onInit() {
     super.onInit();
     initPagination();
-
-    print("USER INITIALIZEd");
   }
 
   @override
   void onDispose() {
     super.onDispose();
     pagingController.dispose();
-    print('아지랑이[SearchedUsersStateNotifier] - 해제');
   }
 }

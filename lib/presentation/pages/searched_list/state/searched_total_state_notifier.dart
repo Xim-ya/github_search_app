@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:github_search_app/app/constant/enum/github_element_category.dart';
 import 'package:github_search_app/app/modules/data_handling/data_state.dart';
 import 'package:github_search_app/app/modules/router/route_argument.dart';
@@ -63,7 +61,6 @@ class SearchedTotalStateNotifier extends BaseStateNotifier {
       },
       onFailure: (e) {
         collectionMap[GithubElementCategory.user] = Failed(e);
-        log('유저 --> ${e.toString()}');
       },
     );
   }
@@ -85,7 +82,6 @@ class SearchedTotalStateNotifier extends BaseStateNotifier {
       },
       onFailure: (e) {
         collectionMap[GithubElementCategory.repository] = Failed(e);
-        log('레포지토리 --> ${e.toString()}');
       },
     );
   }
@@ -106,7 +102,6 @@ class SearchedTotalStateNotifier extends BaseStateNotifier {
       },
       onFailure: (e) {
         collectionMap[GithubElementCategory.issue] = Failed(e);
-        log('이슈 --> ${e.toString()}');
       },
     );
   }
@@ -127,7 +122,6 @@ class SearchedTotalStateNotifier extends BaseStateNotifier {
       },
       onFailure: (e) {
         collectionMap[GithubElementCategory.pr] = Failed(e);
-        log('PR --> ${e.toString()}');
       },
     );
   }
@@ -141,8 +135,6 @@ class SearchedTotalStateNotifier extends BaseStateNotifier {
       _fetchIssueCollection(),
       _fetchPrCollection(),
     ]).whenComplete(() {
-      print('@@@@ 그래도 작동?');
-      print(collectionMap[GithubElementCategory.issue]?.state);
       loaded = true;
       notifyListeners();
     });

@@ -10,8 +10,7 @@ class AppTheme {
 
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColor.white,
-      // 앱바 오버레이 스타일 (Status Area)
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(

@@ -36,7 +36,6 @@ enum PrState {
     return values.firstWhere(
       (state) => state.tag == tag,
       orElse: () {
-        print('주어진 태그 : ${tag}');
         throw Exception('잘못된 반환값');
       },
     );

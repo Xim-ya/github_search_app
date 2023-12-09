@@ -7,7 +7,6 @@ class _FavoriteUserCard
 
   @override
   Widget buildView(BuildContext context) {
-    print('아지랑이 삼칠');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

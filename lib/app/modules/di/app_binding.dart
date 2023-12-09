@@ -15,7 +15,6 @@ abstract class AppBinding {
   static void initialDependencies() {
     locator.registerFactory(() => SplashViewModel());
     locator.registerFactory(() => HomeViewModel());
-    locator.registerLazySingleton(() => SomeProvider());
     locator.registerLazySingleton(
         () => FavoriteFriendStateNotifier(locator<UserRepository>()));
     locator.registerLazySingleton(

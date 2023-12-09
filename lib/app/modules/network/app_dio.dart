@@ -29,7 +29,6 @@ class AppDio with DioMixin implements Dio {
           options.headers['Accept'] = 'application/vnd.github+json';
           options.headers['X-GitHub-Api-Version'] = '2022-11-28';
           options.headers['User-Agent'] = 'request';
-
           return handler.next(options);
         },
         onResponse: (response, handler) {

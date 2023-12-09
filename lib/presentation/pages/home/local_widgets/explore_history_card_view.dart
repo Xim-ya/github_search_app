@@ -21,8 +21,9 @@ class _ExploreHistoryCard
                 child: Builder(
                   builder: (context) {
                     if (histories.isNotEmpty) {
-                      return ListView.builder(
+                      return ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
+                        separatorBuilder: (_, __) => SeparateDivider.thin(),
                         shrinkWrap: true,
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         itemCount: histories.length,
