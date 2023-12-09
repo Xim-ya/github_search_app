@@ -1,0 +1,89 @@
+import 'dart:developer';
+
+import 'package:github_search_app/app/modules/router/route_argument.dart';
+import 'package:github_search_app/feature/pr/repository/models/pr_basic_info_model.dart';
+import 'package:github_search_app/feature/pr/repository/pr_repository.dart';
+import 'package:github_search_app/presentation/base/base_paged_notifier_interface.dart';
+import 'package:github_search_app/presentation/base/base_state_notifier.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+class SearchedPrStateNotifier extends BaseStateNotifier
+    implements BasePagedNotifierInterface<PrBasicInfoModel> {
+  SearchedPrStateNotifier(this._routeArg, this._repository);
+
+  ///
+  /// 이전 화면으로 부터 전달 받은 인자
+  ///
+  final SearchedListPageRouteArg _routeArg;
+
+  ///
+  /// Repo 레포지토리
+  ///
+  final PrRepository _repository;
+
+  ///
+  /// 현재 페이지
+  ///
+  @override
+  int currentPage = BasePagedNotifierInterface.firstPage;
+
+  ///
+  /// 페이징 controller
+  ///
+  @override
+  PagingController<int, PrBasicInfoModel> pagingController =
+      PagingController(firstPageKey: BasePagedNotifierInterface.firstPage);
+
+  ///
+  /// 페이징 데이터 호출
+  ///
+  @override
+  Future<void> fetchPage() async {
+    final response = await _repository.loadSearchedPrList(
+      query: _routeArg.keyword,
+      perPage: BasePagedNotifierInterface.perPage,
+      page: currentPage,
+    );
+
+    response.fold(
+      onSuccess: (prList) {
+        /// 타겟 호출값의 개수보다 실제 호출된
+        /// 데이터 개수가 적으면 마지막 호출로 간주
+        final isLastPage = prList.length < BasePagedNotifierInterface.perPage;
+
+        if (isLastPage) {
+          pagingController.appendLastPage(prList);
+        } else {
+          currentPage += 1;
+          pagingController.appendPage(prList, currentPage);
+        }
+      },
+      onFailure: (e) {
+        log(e.toString());
+        pagingController.error = e;
+      },
+    );
+  }
+
+  ///
+  /// 페이지네이션 등록
+  ///
+  @override
+  Future<void> initPagination() async {
+    pagingController.addPageRequestListener((pageKey) {
+      fetchPage();
+    });
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    initPagination();
+  }
+
+  @override
+  void onDispose() {
+    super.onDispose();
+    pagingController.dispose();
+  }
+}
